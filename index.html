@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niveles de Agua</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Monitoreo de Niveles de Agua</h1>
+    <div class="container">
+        <!-- Fila 1: Cisterna 1 y Cisterna 2 -->
+        <div class="grid fila">
+            <div class="cisterna">
+                <h2>Cisterna 1 Deptos( 1, 2, 3, 7, 8, 11 y 12)</h2>
+                <div class="cilindro cisterna-cilindro" id="cilindro-cisterna1">
+                    <div class="agua" id="agua-cisterna1"></div>
+                </div>
+                <input type="range" id="nivel-cisterna1-control" min="0" max="100" value="50">
+                <p id="nivel-cisterna1-text">50%</p>
+            </div>
+
+            <div class="cisterna">
+                <h2>Cisterna 2 Cisterna 2 (4,5,6,9,10)</h2>
+                <div class="cilindro cisterna-cilindro" id="cilindro-cisterna2">
+                    <div class="agua" id="agua-cisterna2"></div>
+                </div>
+                <input type="range" id="nivel-cisterna2-control" min="0" max="100" value="30">
+                <p id="nivel-cisterna2-text">30%</p>
+            </div>
+        </div>
+
+        <!-- Fila 2: 3 Tinacos -->
+        <div class="grid fila">
+            <div class="tinaco">
+                <h2>Tinaco 1 (Activo)</h2>
+                <div class="cilindro tinaco-cilindro" id="cilindro-tinaco1">
+                    <div class="agua" id="agua-tinaco1"></div>
+                </div>
+                <input type="range" id="nivel-tinaco1-control" min="0" max="100" value="70">
+                <p id="nivel-tinaco1-text">70%</p>
+            </div>
+
+            <div class="tinaco">
+                <h2>Tinaco 2 (Reserva)</h2>
+                <div class="cilindro tinaco-cilindro" id="cilindro-tinaco2">
+                    <div class="agua" id="agua-tinaco2"></div>
+                </div>
+                <input type="range" id="nivel-tinaco2-control" min="0" max="100" value="40">
+                <p id="nivel-tinaco2-text">40%</p>
+            </div>
+
+            <div class="tinaco">
+                <h2>Tinaco 3 (Reserva)</h2>
+                <div class="cilindro tinaco-cilindro" id="cilindro-tinaco3">
+                    <div class="agua" id="agua-tinaco3"></div>
+                </div>
+                <input type="range" id="nivel-tinaco3-control" min="0" max="100" value="90">
+                <p id="nivel-tinaco3-text">90%</p>
+            </div>
+        </div>
+
+        <!-- Fila 3: Un solo tinaco -->
+        <div class="grid fila">
+            <div class="tinaco">
+                <h2>Tinaco Depto 11 y 12</h2>
+                <div class="cilindro tinaco-cilindro" id="cilindro-tinaco-unico">
+                    <div class="agua" id="agua-tinaco-unico"></div>
+                </div>
+                <input type="range" id="nivel-tinaco-unico-control" min="0" max="100" value="60">
+                <p id="nivel-tinaco-unico-text">60%</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
