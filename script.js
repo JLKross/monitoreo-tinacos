@@ -1,53 +1,75 @@
-// Función para actualizar el nivel de agua en el tinaco
-function actualizarNivel(tinacoId, aguaId, controlId, textoId) {
-    const tinaco = document.getElementById(tinacoId);
-    const agua = document.getElementById(aguaId);
-    const control = document.getElementById(controlId);
-    const texto = document.getElementById(textoId);
-    
-    // Obtener el valor del control deslizante (0-100)
-    const nivel = control.value;
-    
-    // Actualizar la altura del agua en función del valor del control deslizante
-    const maxAltura = tinaco.offsetHeight;  // Altura total del tinaco (cilindro)
-    const alturaAgua = (nivel / 100) * maxAltura;  // Calcula la altura del agua
-    
-    // Establecer la altura de la capa de agua
-    agua.style.height = alturaAgua + 'px';
-    
-    // Mostrar el porcentaje en el texto
-    texto.innerHTML = `${nivel}%`;
+document.addEventListener("DOMContentLoaded", function() {
+    // Recuperar los niveles guardados en localStorage o establecer valores por defecto
+    const cisterna1Nivel = localStorage.getItem("nivel-cisterna1") || 50;
+    const cisterna2Nivel = localStorage.getItem("nivel-cisterna2") || 30;
+    const tinaco1Nivel = localStorage.getItem("nivel-tinaco1") || 70;
+    const tinaco2Nivel = localStorage.getItem("nivel-tinaco2") || 40;
+    const tinaco3Nivel = localStorage.getItem("nivel-tinaco3") || 90;
+    const tinacoUnicoNivel = localStorage.getItem("nivel-tinaco-unico") || 60;
+
+    // Establecer los valores iniciales de los controles de rango
+    document.getElementById("nivel-cisterna1-control").value = cisterna1Nivel;
+    document.getElementById("nivel-cisterna2-control").value = cisterna2Nivel;
+    document.getElementById("nivel-tinaco1-control").value = tinaco1Nivel;
+    document.getElementById("nivel-tinaco2-control").value = tinaco2Nivel;
+    document.getElementById("nivel-tinaco3-control").value = tinaco3Nivel;
+    document.getElementById("nivel-tinaco-unico-control").value = tinacoUnicoNivel;
+
+    // Actualizar las visualizaciones
+    updateWaterLevel("cisterna1", cisterna1Nivel);
+    updateWaterLevel("cisterna2", cisterna2Nivel);
+    updateWaterLevel("tinaco1", tinaco1Nivel);
+    updateWaterLevel("tinaco2", tinaco2Nivel);
+    updateWaterLevel("tinaco3", tinaco3Nivel);
+    updateWaterLevel("tinaco-unico", tinacoUnicoNivel);
+
+    // Agregar evento para actualizar los niveles cuando se cambie el control
+    document.getElementById("nivel-cisterna1-control").addEventListener("input", function() {
+        const nivel = this.value;
+        localStorage.setItem("nivel-cisterna1", nivel);
+        document.getElementById("nivel-cisterna1-text").textContent = nivel + "%";
+        updateWaterLevel("cisterna1", nivel);
+    });
+
+    document.getElementById("nivel-cisterna2-control").addEventListener("input", function() {
+        const nivel = this.value;
+        localStorage.setItem("nivel-cisterna2", nivel);
+        document.getElementById("nivel-cisterna2-text").textContent = nivel + "%";
+        updateWaterLevel("cisterna2", nivel);
+    });
+
+    document.getElementById("nivel-tinaco1-control").addEventListener("input", function() {
+        const nivel = this.value;
+        localStorage.setItem("nivel-tinaco1", nivel);
+        document.getElementById("nivel-tinaco1-text").textContent = nivel + "%";
+        updateWaterLevel("tinaco1", nivel);
+    });
+
+    document.getElementById("nivel-tinaco2-control").addEventListener("input", function() {
+        const nivel = this.value;
+        localStorage.setItem("nivel-tinaco2", nivel);
+        document.getElementById("nivel-tinaco2-text").textContent = nivel + "%";
+        updateWaterLevel("tinaco2", nivel);
+    });
+
+    document.getElementById("nivel-tinaco3-control").addEventListener("input", function() {
+        const nivel = this.value;
+        localStorage.setItem("nivel-tinaco3", nivel);
+        document.getElementById("nivel-tinaco3-text").textContent = nivel + "%";
+        updateWaterLevel("tinaco3", nivel);
+    });
+
+    document.getElementById("nivel-tinaco-unico-control").addEventListener("input", function() {
+        const nivel = this.value;
+        localStorage.setItem("nivel-tinaco-unico", nivel);
+        document.getElementById("nivel-tinaco-unico-text").textContent = nivel + "%";
+        updateWaterLevel("tinaco-unico", nivel);
+    });
+});
+
+// Función para actualizar la visualización del nivel de agua
+function updateWaterLevel(id, nivel) {
+    const aguaElement = document.getElementById("agua-" + id);
+    const nivelPorcentaje = nivel;
+    aguaElement.style.height = nivelPorcentaje + "%"; // Ajusta la altura basada en el porcentaje
 }
-
-// Asignar eventos de cambio a los controles deslizantes
-document.getElementById('nivel-cisterna1-control').addEventListener('input', () => {
-    actualizarNivel('cilindro-cisterna1', 'agua-cisterna1', 'nivel-cisterna1-control', 'nivel-cisterna1-text');
-});
-
-document.getElementById('nivel-cisterna2-control').addEventListener('input', () => {
-    actualizarNivel('cilindro-cisterna2', 'agua-cisterna2', 'nivel-cisterna2-control', 'nivel-cisterna2-text');
-});
-
-document.getElementById('nivel-tinaco1-control').addEventListener('input', () => {
-    actualizarNivel('cilindro-tinaco1', 'agua-tinaco1', 'nivel-tinaco1-control', 'nivel-tinaco1-text');
-});
-
-document.getElementById('nivel-tinaco2-control').addEventListener('input', () => {
-    actualizarNivel('cilindro-tinaco2', 'agua-tinaco2', 'nivel-tinaco2-control', 'nivel-tinaco2-text');
-});
-
-document.getElementById('nivel-tinaco3-control').addEventListener('input', () => {
-    actualizarNivel('cilindro-tinaco3', 'agua-tinaco3', 'nivel-tinaco3-control', 'nivel-tinaco3-text');
-});
-
-document.getElementById('nivel-tinaco-unico-control').addEventListener('input', () => {
-    actualizarNivel('cilindro-tinaco-unico', 'agua-tinaco-unico', 'nivel-tinaco-unico-control', 'nivel-tinaco-unico-text');
-});
-
-// Inicializar con los valores actuales
-actualizarNivel('cilindro-cisterna1', 'agua-cisterna1', 'nivel-cisterna1-control', 'nivel-cisterna1-text');
-actualizarNivel('cilindro-cisterna2', 'agua-cisterna2', 'nivel-cisterna2-control', 'nivel-cisterna2-text');
-actualizarNivel('cilindro-tinaco1', 'agua-tinaco1', 'nivel-tinaco1-control', 'nivel-tinaco1-text');
-actualizarNivel('cilindro-tinaco2', 'agua-tinaco2', 'nivel-tinaco2-control', 'nivel-tinaco2-text');
-actualizarNivel('cilindro-tinaco3', 'agua-tinaco3', 'nivel-tinaco3-control', 'nivel-tinaco3-text');
-actualizarNivel('cilindro-tinaco-unico', 'agua-tinaco-unico', 'nivel-tinaco-unico-control', 'nivel-tinaco-unico-text');
